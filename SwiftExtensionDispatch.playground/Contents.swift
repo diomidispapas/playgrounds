@@ -1,8 +1,6 @@
-//: Playground - noun: a place where people can play
+// Example of dynamic dispath of protocol extension
 
-import UIKit
-
-var str = "Hello, playground"
+import Foundation
 
 protocol Greetable {
     func sayHello()
@@ -10,25 +8,29 @@ protocol Greetable {
 
 extension Greetable {
     func sayHello() {
-        print("Hello")
+        print("executing \(#function) from \(Greetable.self)")
     }
     
     func sayHi() {
-        print("Hi")
+        print("executing \(#function) from \(Greetable.self)")
     }
 }
 
 class GreetStruct: Greetable {
     func sayHello() {
-        print("HELLO")
+        print("executing \(#function) from \(GreetStruct.self)")
     }
     
     func sayHi() {
-        print("HI")
+        print("executing \(#function) from \(GreetStruct.self)")
     }
 }
 
+let greetableStruct: Greetable = GreetStruct()
+greetableStruct.sayHello()
+greetableStruct.sayHi() // sayHi() implementation is the Greetable's implementation
+
 let greeterStruct = GreetStruct()
 greeterStruct.sayHello()
-greeterStruct.sayHi()
+greeterStruct.sayHi() // sayHi() implementation is the GreetStruct's implementation
 
